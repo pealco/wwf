@@ -2,7 +2,7 @@ import sys
 import operator
 import string
 import re
-from itertools import permutation, ifilter
+from itertools import permutations, ifilter, chain
 
 WORD_LIST_FILE = "enable1.txt"
 ALPHABET = string.ascii_uppercase
@@ -13,7 +13,7 @@ LETTER_VALUES = {
 }
 
 def flatten(listOfLists):
-    return itertools.chain.from_iterable(listOfLists)
+    return chain.from_iterable(listOfLists)
 
 def point_value(word):
     return sum(LETTER_VALUES[letter] for letter in word if letter not in ALPHABET)
