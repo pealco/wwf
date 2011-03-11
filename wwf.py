@@ -39,9 +39,6 @@ def compute_racks(rack_string):
                     racks += [rack[:index] + letter + rack[index+1:]]
     
     return ifilter(lambda x: x != "*", racks)
-
-def lowercase(iterable):
-    return (s.lower() for s in iterable)
     
 def get_all_perms(rack):
     return flatten(permutations(rack, span) for span in xrange(2, len(rack) + 1))
