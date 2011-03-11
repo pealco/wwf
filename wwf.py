@@ -16,7 +16,6 @@ def flatten(listOfLists):
     return itertools.chain.from_iterable(listOfLists)
     
 def permutations(letters, r=None):
-    if r == None: r = len(letters)
     if len(letters) == 1:
         raise ValueError("Can't find permutations of a single letter.")
     
