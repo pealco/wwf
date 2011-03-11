@@ -5,7 +5,6 @@ import re
 from itertools import permutations, ifilter, chain
 
 WORD_LIST_FILE = "enable1.txt"
-ALPHABET = string.ascii_uppercase
 LETTER_VALUES = {
     "a": 1,  "b": 4, "c": 4, "d": 2, "e": 1, "f": 4, "g": 3, "h": 3, "i": 1, 
     "j": 10, "k": 5, "l": 2, "m": 4, "n": 2, "o": 1, "p": 4, "q": 10, 
@@ -16,7 +15,7 @@ def flatten(listOfLists):
     return chain.from_iterable(listOfLists)
 
 def point_value(word):
-    return sum(LETTER_VALUES[letter] for letter in word if letter not in ALPHABET)
+    return sum(LETTER_VALUES[letter] for letter in word if letter not in string.ascii_uppercase)
     
 def create_word_list(f):
     with open(f, "r") as word_file:
@@ -29,7 +28,7 @@ def compute_racks(rack_string):
     for rack in racks:
         for index, tile in enumerate(rack):
             if tile == '*':
-                for letter in ALPHABET:
+                for letter in string.ascii_uppercase:
                     racks += [rack[:index] + letter + rack[index+1:]]
     
     return ifilter(lambda x: x != "*", racks)
