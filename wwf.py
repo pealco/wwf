@@ -2,7 +2,7 @@ import sys
 import operator
 import string
 import re
-import itertools
+from itertools import permutation, ifilter
 
 WORD_LIST_FILE = "enable1.txt"
 ALPHABET = string.ascii_uppercase
@@ -62,7 +62,7 @@ def sort_candidates(candidates):
 
 def grep(regex, list):
     compiled_regex = re.compile(regex)
-    return itertools.filter(compiled_regex.search, list)
+    return itertools.ifilter(compiled_regex.search, list)
 
 if __name__ == '__main__':
 
