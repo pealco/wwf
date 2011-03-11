@@ -14,12 +14,6 @@ LETTER_VALUES = {
 
 def flatten(listOfLists):
     return itertools.chain.from_iterable(listOfLists)
-    
-def permutations(letters, r=None):
-    if len(letters) == 1:
-        raise ValueError("Can't find permutations of a single letter.")
-    
-    return itertools.permutations(letters, r)
 
 def point_value(word):
     return sum(LETTER_VALUES[letter] for letter in word if letter not in ALPHABET)
