@@ -82,7 +82,7 @@ if __name__ == '__main__':
     rack_string += constraints.translate(None, string.punctuation)  
     
     if rack_string.count('*') > 2:
-        raise ValueError("You can only have a maximum of two blank tiles.")
+        raise ValueError("You can have a maximum of two blank tiles.")
     
     racks = compute_racks(rack_string)
     candidates = compute_candidates(racks)
