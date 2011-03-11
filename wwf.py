@@ -2,7 +2,7 @@ import sys
 import operator
 import string
 import re
-from itertools import permutations, ifilter, chain
+from itertools import permutations, ifilter, chain, product
 
 WORD_LIST_FILE = "enable1.txt"
 LETTER_VALUES = {
@@ -26,7 +26,7 @@ def point_value(word):
     
 def create_word_list(f):
     with open(f, "r") as word_file:
-        word_list = set(tuple(word.rstrip()) for word in word_file)
+        word_list = set(word.rstrip() for word in word_file)
             
     return word_list
 
@@ -41,7 +41,7 @@ def compute_racks(rack_string):
     return ifilter(lambda x: x != "*", racks)
 
 def lowercase(iterable):
-    return tuple(s.lower() for s in iterable)
+    return (s.lower() for s in iterable)
     
 def get_all_perms(rack):
     return flatten(permutations(rack, span) for span in xrange(2, len(rack) + 1))
@@ -50,7 +50,7 @@ def get_perms(racks):
     return flatten(get_all_perms(rack) for rack in racks)
 
 def get_candidates(perms):
-    return dict((''.join(perm), point_value(perm)) for perm in perms if lowercase(perm) in word_list)
+    return dict((''.join(perm), point_value(perm)) for perm in perms if perm.lower() in word_list)
 
 def compute_candidates(racks):
     perms = get_perms(racks)
