@@ -65,6 +65,10 @@ def sort_candidates(candidates):
     candidates = dict([(word, value) for (word, value) in candidates.items() if re.match(constraints, word)])
     return sorted([(v, k) for (k, v) in candidates.items()], reverse=True)
 
+def grep(regex, list):
+    compiled_regex = re.compile(regex)
+    return itertools.filter(compiled_regex.search, list)
+
 if __name__ == '__main__':
 
     try:
