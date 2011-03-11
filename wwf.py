@@ -21,10 +21,10 @@ def permutations(pool, r=None):
 def flatten(listOfLists):
     return chain.from_iterable(listOfLists)
 
-def point_value(word):
+def points(word):
     return sum(LETTER_VALUES[letter] for letter in word if letter not in string.ascii_uppercase)
     
-def create_word_list(f):
+def load_word_list(f):
     with open(f, "r") as word_file:
         word_list = set(word.rstrip() for word in word_file)
             
@@ -52,13 +52,13 @@ def compute_candidates(racks):
     return candidates
     
 def sort_candidates(candidates):
-    candidates = dict([(word, point_value(word)) for word in candidates if re.match(constraints, word)])
+    candidates = dict([(word, points(word)) for word in candidates if re.match(constraints, word)])
     return sorted([(v, k) for (k, v) in candidates.items()], reverse=True)
 
 if __name__ == '__main__':
 
     try:
-        rack_string = sys.argv[1]
+        rack = sys.argv[1]
     except IndexError:
         print "You need to supply some letters."
         sys.exit(1)
@@ -68,13 +68,14 @@ if __name__ == '__main__':
     except IndexError: 
         constraints = "^.*$"
     
-    word_list = create_word_list(WORD_LIST_FILE)
-    rack_string += constraints.translate(None, string.punctuation)  
+    word_list = load_word_list(WORD_LIST_FILE)
+    rack += constraints.translate(None, string.punctuation)  
     
-    if rack_string.count('*') > 2:
+    if rack.count('*') > 2:
         raise ValueError("You can have a maximum of two blank tiles.")
     
-    racks = compute_racks(rack_string)
+    
+    racks = compute_racks(rack)
     candidates = compute_candidates(racks)
     sorted_candidates = sort_candidates(candidates)
     
