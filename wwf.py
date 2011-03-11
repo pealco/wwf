@@ -46,11 +46,9 @@ def get_all_perms(rack):
 def get_perms(racks):
     return flatten(get_all_perms(rack) for rack in racks)
 
-def get_candidates(perms):
-    return dict((''.join(perm), point_value(perm)) for perm in perms if perm.lower() in word_list)
-
 def compute_candidates(racks):
     perms = get_perms(racks)
+    candidates = dict((''.join(perm), point_value(perm)) for perm in perms if perm.lower() in word_list)
     return get_candidates(perms)
     
 def sort_candidates(candidates):
