@@ -48,11 +48,11 @@ def get_perms(racks):
 
 def compute_candidates(racks):
     perms = get_perms(racks)
-    candidates = dict((''.join(perm), point_value(perm)) for perm in perms if perm.lower() in word_list)
+    candidates = (perm for perm in perms if perm.lower() in word_list)
     return candidates
     
 def sort_candidates(candidates):
-    candidates = dict([(word, value) for (word, value) in candidates.items() if re.match(constraints, word)])
+    candidates = dict([(word, point_value(word)) for word in candidates if re.match(constraints, word)])
     return sorted([(v, k) for (k, v) in candidates.items()], reverse=True)
 
 def grep(regex, list):
