@@ -45,9 +45,6 @@ def compute_racks(rack_string):
     
     return set(rack for rack in racks if '*' not in rack)
 
-def exists(word):
-    return word in word_list
-
 def lowercase(iterable):
     return tuple(s.lower() for s in iterable)
     
@@ -58,7 +55,7 @@ def get_perms(racks):
     return flatten(get_all_perms(rack) for rack in racks)
 
 def get_candidates(perms):
-    return dict((''.join(perm), point_value(perm)) for perm in perms if exists(lowercase(perm)))
+    return dict((''.join(perm), point_value(perm)) for perm in perms if lowercase(perm) in word_list)
 
 def compute_candidates(racks):
     perms = get_perms(racks)
