@@ -19,10 +19,6 @@ def permutations(letters, r=None):
     if r == None: r = len(letters)
     if len(letters) == 1:
         raise ValueError("Can't find permutations of a single letter.")
-    if r < 2:
-        raise ValueError("r is too small; it must at least 2.")
-    if r > len(letters):
-        raise ValueError("r is too big; it can only be as big as len(letters)")
     
     return itertools.permutations(letters, r)
 
