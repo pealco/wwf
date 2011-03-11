@@ -32,7 +32,7 @@ def compute_racks(rack_string):
                 for letter in ALPHABET:
                     racks += [rack[:index] + letter + rack[index+1:]]
     
-    return set(rack for rack in racks if '*' not in rack)
+    return ifilter(lambda x: x != "*", racks)
 
 def lowercase(iterable):
     return tuple(s.lower() for s in iterable)
