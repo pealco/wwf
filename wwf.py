@@ -11,6 +11,13 @@ LETTER_VALUES = {
     "r": 1,  "s": 1, "t": 1, "u": 2, "v": 5, "w": 4, "x": 8, "y": 3, "z": 10, "*": 0
 }
 
+def permutations(pool, r=None):
+    n = len(pool)
+    r = n if r is None else r
+    for indices in product(range(n), repeat=r):
+        if len(set(indices)) == r:
+            yield "".join([pool[i] for i in indices])
+
 def flatten(listOfLists):
     return chain.from_iterable(listOfLists)
 
